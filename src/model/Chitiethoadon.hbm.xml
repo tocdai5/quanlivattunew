@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 5, 2015 2:15:39 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="model.Chitiethoadon" table="chitiethoadon" catalog="quanlivattu">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="vattu" class="model.Vattu" fetch="join">
+            <column name="Mavattu" not-null="true" />
+        </many-to-one>
+        <many-to-one name="hoadon" class="model.Hoadon" fetch="select">
+            <column name="Sochungtu"  />
+        </many-to-one>
+        <property name="soluong" type="int">
+            <column name="Soluong" not-null="true" />
+        </property>
+        <property name="thue" type="float">
+            <column name="Thue" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="thanhtien" type="double">
+            <column name="Thanhtien" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="ghichu" type="string">
+            <column name="Ghichu" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

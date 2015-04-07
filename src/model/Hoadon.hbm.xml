@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 5, 2015 2:15:39 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="model.Hoadon" table="hoadon" catalog="quanlivattu">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="kho" class="model.Kho" fetch="join">
+            <column name="Makho"  />
+        </many-to-one>
+        <many-to-one name="user" class="model.User" fetch="join">
+            <column name="Mauser"  />
+        </many-to-one>
+        <many-to-one name="nhacungcap" class="model.Nhacungcap" fetch="join">
+            <column name="Manhacungcap"  />
+        </many-to-one>
+        <many-to-one name="doituong" class="model.Doituong" fetch="join">
+            <column name="Madoituong"  />
+        </many-to-one>
+        <property name="ngay" type="date">
+            <column name="Ngay" length="10" not-null="true" />
+        </property>
+        <property name="sochungtu" type="string">
+            <column name="Sochungtu" length="20" not-null="true" />
+        </property>
+        <property name="sohoadon" type="java.lang.Integer">
+            <column name="Sohoadon" />
+        </property>
+        <property name="loaihoadon" type="string">
+            <column name="Loaihoadon" length="50" not-null="true" />
+        </property>
+        <property name="thanhtoan" type="string">
+            <column name="Thanhtoan" not-null="true" />
+        </property>
+        <property name="nguoinhan" type="string">
+            <column name="Nguoinhan" length="50" />
+        </property>
+        <property name="ghichu" type="string">
+            <column name="Ghichu" length="50" />
+        </property>
+        <set name="chitiethoadons" table="chitiethoadon" inverse="false" lazy="false" cascade="all">
+            <key>
+                <column name="Sochungtu"  />
+            </key>
+            <one-to-many class="model.Chitiethoadon" />
+        </set>
+    </class>
+</hibernate-mapping>
