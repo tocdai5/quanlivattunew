@@ -32,6 +32,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import model.Chitiethoadon;
+import model.Doituong;
 import model.Hoadon;
 import model.Kho;
 import model.Nhacungcap;
@@ -50,23 +51,23 @@ import java.awt.Window.Type;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 
-public class FormNhapKho extends JFrame {
+public class FormXuatKho extends JFrame {
 
 	private JPanel contentPane;
 	private JDateChooser dateNgaynhap;
 	private JTextField txtnguoinhan;
-	private JTextField txtsohoadon;
+	private JTextField txtMakho;
 	public static JTextField txtMavt;
 	public static JTextField txtdvt;
-	private JTextField txtthue;
+	private JTextField txthangton;
 	private JTextField txtghichu;
 	public static JTextField txttenvattu;
 	private JTextField txtsoluong;
 	public static JTextField txtdongia;
 	private JTable tbvattu;
 	private JTextField txtsochungtu;
-	public 	static JTextField txtnhacungcap;
-	public static JTextField txtkhonhap;
+	public 	static JTextField txtTendoituong;
+	public static JTextField txtTenkho;
 	public static JTextField txtdiachi;
 	private JTextField txthdgc;
 	private JTable tbhoadon;
@@ -75,10 +76,7 @@ public class FormNhapKho extends JFrame {
 	private HoadonHome homehd=new HoadonHome();
 	
 	private JTextField txtThanhtien;
-	
-	private JComboBox cbloaihd ;
 	private JComboBox cbnguoikt ;
-	private JComboBox cbthanhtoan;
 	
 	private boolean enableBtn = false;
 	
@@ -88,6 +86,7 @@ public class FormNhapKho extends JFrame {
 	public static Nhacungcap nhacungcap;
 	public static User user;
 	public static Vattu vt;
+	public static Doituong dt;
 	public final JMenuItem mntmDanhMcKho = new JMenuItem("Danh mục Kho");
 	public final JMenuItem mntmDanhMcNh = new JMenuItem("Danh mục Nhà cung cấp");
 	public final JMenuItem mntmDanhMci = new JMenuItem("Danh mục Đối tượng");
@@ -104,7 +103,7 @@ public class FormNhapKho extends JFrame {
 			@Override
 			public void run() {
 				try {
-					FormNhapKho frame = new FormNhapKho();
+					FormXuatKho frame = new FormXuatKho();
 					frame.setVisible(true);
 					frame.setResizable(false);
 				} catch (Exception e) {
@@ -120,8 +119,8 @@ public class FormNhapKho extends JFrame {
 	/**
 	 * 
 	 */
-	public FormNhapKho() {
-		setTitle("Nhập kho");
+	public FormXuatKho() {
+		setTitle("Xuất kho");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setBounds(100, 100, 720, 487);
@@ -135,43 +134,39 @@ public class FormNhapKho extends JFrame {
 		
 		JPanel panel_hd = new JPanel();
 		panel_hd.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "H\u00F3a \u0111\u01A1n", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 255)));
-		panel_hd.setBounds(10, 32, 589, 207);
+		panel_hd.setBounds(10, 32, 589, 183);
 		contentPane.add(panel_hd);
 		panel_hd.setLayout(null);
 		
-		JLabel lblngaynhap = new JLabel("Ng\u00E0y Nh\u1EADp");
+		JLabel lblngaynhap = new JLabel("Ngày Xuất");
 		lblngaynhap.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblngaynhap.setBounds(10, 26, 90, 14);
 		panel_hd.add(lblngaynhap);
 		
-		JLabel lblsohd = new JLabel("S\u1ED1 H\u00F3a \u0110\u01A1n");
+		JLabel lblsohd = new JLabel("Mã kho");
 		lblsohd.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblsohd.setBounds(10, 51, 90, 14);
 		panel_hd.add(lblsohd);
 		
-		JLabel lblnhacc = new JLabel("Nh\u00E0 Cung C\u1EA5p");
+		JLabel lblnhacc = new JLabel("Đối tượng");
 		lblnhacc.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblnhacc.setBounds(10, 85, 90, 14);
 		panel_hd.add(lblnhacc);
 		
-		JLabel lblloaihd = new JLabel("Lo\u1EA1i H\u00F3a \u0110\u01A1n");
-		lblloaihd.setBounds(10, 113, 90, 14);
-		panel_hd.add(lblloaihd);
-		
 		JLabel lblnguoikt = new JLabel("Ng\u01B0\u1EDDi Ki\u1EC3m Tra");
 		lblnguoikt.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblnguoikt.setBounds(10, 145, 90, 14);
+		lblnguoikt.setBounds(10, 123, 90, 14);
 		panel_hd.add(lblnguoikt);
 		
 		JLabel lblGhiChu = new JLabel("Ghi Ch\u00FA");
-		lblGhiChu.setBounds(10, 176, 90, 14);
+		lblGhiChu.setBounds(10, 151, 90, 14);
 		panel_hd.add(lblGhiChu);
 		
 		JLabel lblsoct = new JLabel("S\u1ED1 Ch\u1EE9ng T\u1EEB");
 		lblsoct.setBounds(307, 26, 84, 14);
 		panel_hd.add(lblsoct);
 		
-		JLabel lblkhonhap = new JLabel("Kho Nh\u1EADp");
+		JLabel lblkhonhap = new JLabel("Tên kho");
 		lblkhonhap.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblkhonhap.setBounds(307, 54, 68, 14);
 		panel_hd.add(lblkhonhap);
@@ -180,68 +175,17 @@ public class FormNhapKho extends JFrame {
 		lbldiachi.setBounds(305, 85, 68, 14);
 		panel_hd.add(lbldiachi);
 		
-		JLabel lblThanhtoan = new JLabel("Thanh To\u00E1n");
-		lblThanhtoan.setBounds(305, 113, 68, 14);
-		panel_hd.add(lblThanhtoan);
-		
 		JLabel lblNguoinhan = new JLabel("Ng\u01B0\u1EDDi Nh\u1EADn");
-		lblNguoinhan.setBounds(305, 145, 68, 14);
+		lblNguoinhan.setBounds(307, 123, 68, 14);
 		panel_hd.add(lblNguoinhan);
 		
 		txtnguoinhan = new JTextField();
-		txtnguoinhan.setBounds(383, 142, 103, 20);
+		txtnguoinhan.setBounds(385, 120, 103, 20);
 		panel_hd.add(txtnguoinhan);
 		txtnguoinhan.setColumns(10);
 		
-		txtsohoadon = new JTextField();
-		txtsohoadon.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtsohoadon.setBounds(110, 51, 154, 20);
-		panel_hd.add(txtsohoadon);
-		txtsohoadon.setColumns(10);
-		
-		String items[] = {"Tài chính" , "Bán lẻ"};
-		cbloaihd = new JComboBox(items);
-		cbloaihd.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		cbloaihd.setEditable(true);
-		cbloaihd.setBounds(110, 110, 154, 20);
-		panel_hd.add(cbloaihd);
-		
-		cbnguoikt = new JComboBox();
-		cbnguoikt.setEditable(true);
-		cbnguoikt.setBounds(110, 142, 154, 20);
-		panel_hd.add(cbnguoikt);
-		
-		String itms[] = {"Tiền mặt" , "Chuyển khoản"};
-		cbthanhtoan = new JComboBox(itms);
-		cbthanhtoan.setEditable(true);
-		cbthanhtoan.setBounds(383, 110, 103, 20);
-		panel_hd.add(cbthanhtoan);
-		
-		txtsochungtu = new JTextField();
-		txtsochungtu.setEditable(false);
-		txtsochungtu.setColumns(10);
-		txtsochungtu.setBounds(383, 23, 179, 20);
-		panel_hd.add(txtsochungtu);
-		
-		txtnhacungcap = new JTextField();
-		txtnhacungcap.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(e.getClickCount() == 2 )
-				{
-					FormNhacungcap fncc = new FormNhacungcap();
-					fncc.setVisible(true);
-					fncc.setAlwaysOnTop(true);
-				}
-			}
-		});
-		txtnhacungcap.setEditable(false);
-		txtnhacungcap.setColumns(10);
-		txtnhacungcap.setBounds(110, 82, 154, 20);
-		panel_hd.add(txtnhacungcap);
-		
-		txtkhonhap = new JTextField();
-		txtkhonhap.addMouseListener(new MouseAdapter() {
+		txtMakho = new JTextField();
+		txtMakho.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(e.getClickCount() == 2 )
@@ -252,10 +196,49 @@ public class FormNhapKho extends JFrame {
 				}
 			}
 		});
-		txtkhonhap.setEditable(false);
-		txtkhonhap.setColumns(10);
-		txtkhonhap.setBounds(383, 51, 179, 20);
-		panel_hd.add(txtkhonhap);
+		txtMakho.setEditable(false);
+		txtMakho.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		txtMakho.setBounds(110, 51, 154, 20);
+		panel_hd.add(txtMakho);
+		txtMakho.setColumns(10);
+		
+		String items[] = {"Tài chính" , "Bán lẻ"};
+		
+		cbnguoikt = new JComboBox();
+		cbnguoikt.setEditable(true);
+		cbnguoikt.setBounds(110, 120, 154, 20);
+		panel_hd.add(cbnguoikt);
+		
+		String itms[] = {"Tiền mặt" , "Chuyển khoản"};
+		
+		txtsochungtu = new JTextField();
+		txtsochungtu.setEditable(false);
+		txtsochungtu.setColumns(10);
+		txtsochungtu.setBounds(383, 23, 179, 20);
+		panel_hd.add(txtsochungtu);
+		
+		txtTendoituong = new JTextField();
+		txtTendoituong.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(e.getClickCount() == 2 )
+				{
+					FormNhacungcap fncc = new FormNhacungcap();
+					fncc.setVisible(true);
+					fncc.setAlwaysOnTop(true);
+				}
+			}
+		});
+		txtTendoituong.setEditable(false);
+		txtTendoituong.setColumns(10);
+		txtTendoituong.setBounds(110, 82, 154, 20);
+		panel_hd.add(txtTendoituong);
+		
+		txtTenkho = new JTextField();
+		txtTenkho.setEditable(false);
+		txtTenkho.setColumns(10);
+		txtTenkho.setBounds(383, 51, 179, 20);
+		panel_hd.add(txtTenkho);
 		
 		txtdiachi = new JTextField();
 		txtdiachi.setEditable(false);
@@ -265,7 +248,7 @@ public class FormNhapKho extends JFrame {
 		
 		txthdgc = new JTextField();
 		txthdgc.setColumns(10);
-		txthdgc.setBounds(110, 173, 452, 20);
+		txthdgc.setBounds(110, 148, 452, 20);
 		panel_hd.add(txthdgc);
 		
 		dateNgaynhap = new JDateChooser();
@@ -314,6 +297,7 @@ public class FormNhapKho extends JFrame {
 					suathongtinHoadon(hd);
 					suaduoimodel(index,hd);
 				}
+
 			}
 		});
 		btsuahd.setBounds(620, 151, 116, 56);
@@ -335,7 +319,7 @@ public class FormNhapKho extends JFrame {
 		JScrollPane scrollPane_hd = new JScrollPane();
 		scrollPane_hd.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane_hd.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane_hd.setBounds(10, 250, 869, 86);
+		scrollPane_hd.setBounds(10, 226, 869, 110);
 		contentPane.add(scrollPane_hd);
 		
 		tbhoadon = new JTable(modelhoadon);
@@ -355,14 +339,11 @@ public class FormNhapKho extends JFrame {
 				}
 			}
 		});
-		modelhoadon.addColumn("Ngày nhập");
+		modelhoadon.addColumn("Ngày xuất");
 		modelhoadon.addColumn("Số chứng từ");
-		modelhoadon.addColumn("Số hóa đơn");
-		modelhoadon.addColumn("Kho nhập");
-		modelhoadon.addColumn("Nhà cung cấp");	
+		modelhoadon.addColumn("Tên kho");
+		modelhoadon.addColumn("Đối tượng");
 		modelhoadon.addColumn("Địa chỉ");
-		modelhoadon.addColumn("Loại hóa đơn");
-		modelhoadon.addColumn("Thanh toán");	
 		modelhoadon.addColumn("Người kiểm tra");
 		modelhoadon.addColumn("Người nhận");
 		modelhoadon.addColumn("Ghi chú");
@@ -448,8 +429,8 @@ public class FormNhapKho extends JFrame {
 		lbldvt.setBounds(10, 49, 70, 14);
 		panel_cthd.add(lbldvt);
 		
-		JLabel lblthue = new JLabel("Thu\u1EBF");
-		lblthue.setBounds(10, 74, 46, 14);
+		JLabel lblthue = new JLabel("Trong kho còn");
+		lblthue.setBounds(10, 74, 83, 14);
 		panel_cthd.add(lblthue);
 		
 		JLabel lblGhiCh_1 = new JLabel("Ghi Ch\u00FA");
@@ -481,23 +462,23 @@ public class FormNhapKho extends JFrame {
 			}
 		});
 		txtMavt.setEditable(false);
-		txtMavt.setBounds(85, 21, 122, 20);
+		txtMavt.setBounds(95, 21, 122, 20);
 		panel_cthd.add(txtMavt);
 		txtMavt.setColumns(10);
 		
 		txtdvt = new JTextField();
 		txtdvt.setEditable(false);
-		txtdvt.setBounds(85, 46, 122, 20);
+		txtdvt.setBounds(95, 46, 122, 20);
 		panel_cthd.add(txtdvt);
 		txtdvt.setColumns(10);
 		
-		txtthue = new JTextField();
-		txtthue.setBounds(85, 71, 122, 20);
-		panel_cthd.add(txtthue);
-		txtthue.setColumns(10);
+		txthangton = new JTextField();
+		txthangton.setBounds(95, 71, 122, 20);
+		panel_cthd.add(txthangton);
+		txthangton.setColumns(10);
 		
 		txtghichu = new JTextField();
-		txtghichu.setBounds(85, 104, 399, 20);
+		txtghichu.setBounds(95, 104, 389, 20);
 		panel_cthd.add(txtghichu);
 		txtghichu.setColumns(10);
 		
@@ -638,7 +619,7 @@ public class FormNhapKho extends JFrame {
 			JOptionPane.showMessageDialog(null, "So luong vat tu khong the rong");
 			return false;
 		}
-		else if(txtthue.getText().isEmpty())
+		else if(txthangton.getText().isEmpty())
 		{
 			JOptionPane.showMessageDialog(null, "Thue khong the rong");
 			return false;
@@ -666,8 +647,6 @@ public class FormNhapKho extends JFrame {
 
 	// bo sung them
 	protected void suathongtinHoadon(Hoadon hd) {
-		hd.setLoaihoadon(cbloaihd.getSelectedItem().toString());
-		hd.setThanhtoan(cbthanhtoan.getSelectedItem().toString());
 		//hd.setUser(user) test truoc da
 		String nguoinhan = txtnguoinhan.getText();
 		if(!nguoinhan.isEmpty()){
@@ -679,7 +658,7 @@ public class FormNhapKho extends JFrame {
 		modelhoadon.setRowCount(0);
 		for(Hoadon hd: dsHD.getListHD()){
 			Object[] ob={getFormatDate(hd.getNgay()),hd.getSochungtu(),hd.getSohoadon(),hd.getKho(),
-					hd.getNhacungcap(),hd.getNhacungcap().getDiachi(),hd.getLoaihoadon(),	hd.getThanhtoan(),
+					hd.getNhacungcap(),hd.getDoituong(),hd.getLoaihoadon(),	hd.getThanhtoan(),
 					hd.getUser(),hd.getNguoinhan(),hd.getGhichu()};
 			modelhoadon.addRow(ob);
 		}
@@ -708,7 +687,7 @@ public class FormNhapKho extends JFrame {
 		txtdvt.setText(vt.getDonvitinh());
 		txtdongia.setText(String.valueOf(vt.getDongia()));
 		txtsoluong.setText(String.valueOf(cthd.getSoluong()));
-		txtthue.setText(String.valueOf(cthd.getThue()));
+		txthangton.setText(String.valueOf(cthd.getThue()));
 		txtghichu.setText(cthd.getGhichu());
 	}
 
@@ -727,13 +706,13 @@ public class FormNhapKho extends JFrame {
 		txtdongia.setText("");
 		txtdvt.setText("");
 		txtsoluong.setText("");
-		txtthue.setText("");
+		txthangton.setText("");
 		txtghichu.setText("");
 	}
 
 	protected void themlentable(Chitiethoadon cthd) {
-		Object[] ob = {txtsochungtu.getText(), cthd.getVattu().getMavattu() , cthd.getVattu().getTenvattu() , cthd.getVattu().getDonvitinh() ,cthd.getSoluong() , cthd.getVattu().getDongia() , 
-				cthd.getThue() , getThanhtien(cthd.getSoluong(), cthd.getVattu().getDongia(), cthd.getThue()) ,cthd.getGhichu()};
+		Object[] ob = {cthd.getId(), cthd.getVattu().getMavattu() , cthd.getVattu().getTenvattu() , cthd.getVattu().getDonvitinh() ,cthd.getSoluong() , cthd.getVattu().getDongia() , 
+				 getThanhtien(cthd.getSoluong(), cthd.getVattu().getDongia()) ,cthd.getGhichu()};
 		modelvattu.addRow(ob);
 	}
 
@@ -743,9 +722,7 @@ public class FormNhapKho extends JFrame {
 		cthd.setVattu(vt);
 		int sl = Integer.parseInt(txtsoluong.getText());
 		cthd.setSoluong(sl);
-		float thue = Float.parseFloat(txtthue.getText());
-		cthd.setThue(thue);
-		double thanhtien = Double.parseDouble(getThanhtien(sl, vt.getDongia(), thue));
+		double thanhtien = Double.parseDouble(getThanhtien(sl, vt.getDongia()));
 		cthd.setThanhtien(thanhtien);
 		cthd.setGhichu(txtghichu.getText());
 		return cthd;
@@ -761,23 +738,21 @@ public class FormNhapKho extends JFrame {
 		
 		hd.setNgay(dateNgaynhap.getDate());
 		hd.setSochungtu(txtsochungtu.getText());
-		String sohd = txtsohoadon.getText();
+		String sohd = txtMakho.getText();
 		if(!sohd.isEmpty())
 			hd.setSohoadon(Integer.parseInt(sohd));
-		String tenkho = txtkhonhap.getText();
+		String tenkho = txtTenkho.getText();
 		if(!tenkho.isEmpty())
 			hd.setKho(kho);
-		String ncc = txtnhacungcap.getText();
-		if(!ncc.isEmpty())
+		String dt = txtTendoituong.getText();
+		if(!dt.isEmpty())
 			hd.setNhacungcap(nhacungcap);
-		hd.setLoaihoadon(cbloaihd.getSelectedItem().toString());
-		hd.setThanhtoan(cbthanhtoan.getSelectedItem().toString());
 		//hd.setUser(user); test truoc da
 		String nguoinhan = txtnguoinhan.getText();
 		if(!nguoinhan.isEmpty()){
 			hd.setNguoinhan(nguoinhan);
 		}
-		hd.setGhichu(txtghichu.getText());
+		// con ghi chu 
 		return hd;
 	}
 
@@ -788,12 +763,12 @@ public class FormNhapKho extends JFrame {
 	private void setSochungtu() {
 		if(dsHD.getListHD().isEmpty())
 		{
-			txtsochungtu.setText("1/NK");
+			txtsochungtu.setText("1/XK");
 		}
 		else
 		{
 			int size = dsHD.getListHD().size();
-			String sct = String.valueOf(size + 1 ) + "/NK";
+			String sct = String.valueOf(size + 1 ) + "/XK";
 			txtsochungtu.setText(sct.toString());
 		}
 	}
@@ -805,20 +780,20 @@ public class FormNhapKho extends JFrame {
 		for(Iterator<Chitiethoadon> it = chitiethds.iterator(); it.hasNext() ;)
 		{
 			Chitiethoadon cthd = it.next();
-			Object[] ob = {hd.getSochungtu() ,
+			Object[] ob = {hd.getId(),
 					cthd.getVattu().getMavattu() ,
 					cthd.getVattu().getTenvattu() , 
 					cthd.getVattu().getDonvitinh() ,cthd.getSoluong() ,cthd.getVattu().getDongia(),
-					cthd.getThue(),getThanhtien(cthd.getSoluong(),cthd.getVattu().getDongia() ,cthd.getThue())};
+				getThanhtien(cthd.getSoluong(),cthd.getVattu().getDongia()),cthd.getGhichu()};
 			modelvattu.addRow(ob);
 		}
 		// set danh sach chi tiet hoa don lay trong 1 hoa don
 		dscthd.setCthds(chitiethds);
 	}
 		
-	private String getThanhtien(int soluong, double dongia, float thue) {
+	private String getThanhtien(int soluong, double dongia) {
 		
-		double thanhtien = (soluong * dongia) + (soluong * dongia * thue )/ 100;
+		double thanhtien = soluong * dongia;
 		return String.valueOf(thanhtien);
 	}
 
@@ -830,12 +805,10 @@ public class FormNhapKho extends JFrame {
 			dateNgaynhap.setDate(hd.getNgay());
 			txtsochungtu.setText(hd.getSochungtu());
 			if(hd.getSohoadon() != null )
-				txtsohoadon.setText(Integer.toString(hd.getSohoadon()));
-			txtkhonhap.setText(hd.getKho().toString());
-			txtnhacungcap.setText(hd.getNhacungcap().toString());
-			txtdiachi.setText(hd.getNhacungcap().toString());
-			cbloaihd.setSelectedItem(hd.getLoaihoadon());
-			cbthanhtoan.setSelectedItem(hd.getThanhtoan());
+				txtMakho.setText(hd.getKho().getMakho());
+			txtTenkho.setText(hd.getKho().toString());
+			txtTendoituong.setText(hd.getDoituong().toString());
+			txtdiachi.setText(hd.getDoituong().toString());
 			cbnguoikt.setSelectedItem(hd.getUser().toString());
 			if(hd.getNguoinhan() != null)
 				txtnguoinhan.setText(hd.getNguoinhan());
@@ -848,12 +821,10 @@ public class FormNhapKho extends JFrame {
 	
 	private void lammoitthongtin() {
 		dateNgaynhap.setDate(new Date());
-		txtsohoadon.setText("");
-		txtkhonhap.setText("");
-		txtnhacungcap.setText("");
+		txtMakho.setText("");
+		txtTenkho.setText("");
+		txtTendoituong.setText("");
 		txtdiachi.setText("");
-		cbloaihd.setSelectedItem("Ban lẻ");
-		cbthanhtoan.setSelectedItem("Tiền mặt");
 		cbnguoikt.setSelectedItem("tocdai");
 		txtnguoinhan.setText("");
 		txthdgc.setText("");
