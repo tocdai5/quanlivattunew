@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import quanly.QuanlyNhacungcap;
-
+import model.Doituong;
 import model.Nhacungcap;
 
 public class DanhsachNhacungcap {
@@ -18,7 +18,10 @@ public class DanhsachNhacungcap {
 		else
 			lstNhacungcap = new ArrayList<Nhacungcap>();
 	}
-
+	public Nhacungcap getByIndex(int index)
+	{
+		return lstNhacungcap.get(index);
+	}
 	public List<Nhacungcap> getLstNhacungcap() {
 		return lstNhacungcap;
 	}

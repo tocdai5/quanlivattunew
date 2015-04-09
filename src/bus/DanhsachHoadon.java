@@ -50,7 +50,8 @@ public class DanhsachHoadon {
 			newhd.setLoaihoadon(hd.getLoaihoadon());
 			newhd.setThanhtoan(hd.getThanhtoan());
 			newhd.setNguoinhan(hd.getNguoinhan());
-			qlhd.luuHoadonmoi(newhd);
+			newhd.setChitiethoadons(hd.getChitiethoadons());
+			qlhd.capnhapHoadon(newhd);
 		}
 	}
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import quanly.QuanlyKho;
-
+import model.Doituong;
 import model.Kho;
 
 public class DanhsachKho {
@@ -23,7 +23,10 @@ public class DanhsachKho {
 			lstKho = new ArrayList<Kho>();
 		}
 	}
-
+	public Kho getByIndex(int index)
+	{
+		return lstKho.get(index);
+	}
 	public List<Kho> getLstKho() {
 		return lstKho;
 	}
@@ -32,7 +35,6 @@ public class DanhsachKho {
 	{
 		return lstKho.get(index);
 	}
-	
 	
 	
 	

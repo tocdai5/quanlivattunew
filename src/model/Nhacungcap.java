@@ -77,6 +77,32 @@ public class Nhacungcap implements java.io.Serializable {
 	public String toString() {
 		return  tennhacungcap ;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((manhacungcap == null) ? 0 : manhacungcap.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Nhacungcap other = (Nhacungcap) obj;
+		if (manhacungcap == null) {
+			if (other.manhacungcap != null)
+				return false;
+		} else if (!manhacungcap.equals(other.manhacungcap))
+			return false;
+		return true;
+	}
 	
 	
 

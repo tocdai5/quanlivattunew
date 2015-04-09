@@ -286,7 +286,7 @@ public class FormNhapKho extends JFrame {
 				if(dsHD.themHoadon(hd))
 				{
 					JOptionPane.showMessageDialog(null, "Them hoa don thanh cong");
-					themxuongModelHoadon();
+					themxuongTableHoadon();
 				}
 				else
 				{
@@ -313,6 +313,7 @@ public class FormNhapKho extends JFrame {
 					Hoadon hd = dsHD.getByIndex(index);
 					suathongtinHoadon(hd);
 					suaduoimodel(index,hd);
+					dsHD.suahoadon(hd, index);
 				}
 			}
 		});
@@ -366,7 +367,7 @@ public class FormNhapKho extends JFrame {
 		modelhoadon.addColumn("Người kiểm tra");
 		modelhoadon.addColumn("Người nhận");
 		modelhoadon.addColumn("Ghi chú");
-		themxuongModelHoadon();
+		themxuongTableHoadon();
 		
 		scrollPane_hd.setViewportView(tbhoadon);
 		
@@ -554,16 +555,44 @@ public class FormNhapKho extends JFrame {
 		mnNewMenu.setHorizontalAlignment(SwingConstants.RIGHT);
 		menuBar.add(mnNewMenu);
 		{
+			mntmDanhSch.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					FormDSDoituong frdt=new FormDSDoituong();
+					frdt.setVisible(true);
+					frdt.setAlwaysOnTop(true);
+				}
+			});
 			mnNewMenu.add(this.mntmDanhSch);
 		}
 		{
+			mntmDanhSchNh.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					FormDSNCC frncc=new FormDSNCC();
+					frncc.setVisible(true);
+					frncc.setAlwaysOnTop(true);
+				}
+			});
 			mnNewMenu.add(this.mntmDanhSchNh);
 		}
 		{
+			mntmDanhSchKho.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					FormDSKho frkho=new FormDSKho();
+					frkho.setVisible(true);
+					frkho.setAlwaysOnTop(true);
+				}
+			});
 			mnNewMenu.add(this.mntmDanhSchKho);
 		}
 		
 		JMenuItem mntmDanhSchVt = new JMenuItem("Danh sách Vật tư");
+		mntmDanhSchVt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FormDSVattu fdsvt = new FormDSVattu();
+				fdsvt.setVisible(true);
+				fdsvt.setAlwaysOnTop(true);
+			}
+		});
 		mnNewMenu.add(mntmDanhSchVt);
 		
 		JMenu mnNewMenu_1 = new JMenu("Danh mục");
@@ -592,6 +621,9 @@ public class FormNhapKho extends JFrame {
 		{
 			this.mntmDanhMci.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					FormDoituong frdt=new FormDoituong();
+					frdt.setVisible(true);
+					frdt.setAlwaysOnTop(true);
 				}
 			});
 			mnNewMenu_1.add(this.mntmDanhMci);
@@ -675,7 +707,7 @@ public class FormNhapKho extends JFrame {
 		}
 	}
 
-	private void themxuongModelHoadon() {
+	private void themxuongTableHoadon() {
 		modelhoadon.setRowCount(0);
 		for(Hoadon hd: dsHD.getListHD()){
 			Object[] ob={getFormatDate(hd.getNgay()),hd.getSochungtu(),hd.getSohoadon(),hd.getKho(),

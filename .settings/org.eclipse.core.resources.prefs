@@ -1,4 +1,9 @@
 eclipse.preferences.version=1
+encoding//src/gui/FormNhapKho.java=UTF-8
+encoding//src/pre/FormDSDoituong.java=UTF-8
+encoding//src/pre/FormDSKho.java=UTF-8
+encoding//src/pre/FormDSNCC.java=UTF-8
+encoding//src/pre/FormDSVattu.java=UTF-8
 encoding//src/pre/FormDangNhap.java=UTF-8
 encoding//src/pre/FormDoituong.java=UTF-8
 encoding//src/pre/FormNhacungcap.java=UTF-8

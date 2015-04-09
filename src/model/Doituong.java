@@ -77,6 +77,32 @@ public class Doituong implements java.io.Serializable {
 	public String toString() {
 		return tendoituong ;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((madoituong == null) ? 0 : madoituong.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Doituong other = (Doituong) obj;
+		if (madoituong == null) {
+			if (other.madoituong != null)
+				return false;
+		} else if (!madoituong.equals(other.madoituong))
+			return false;
+		return true;
+	}
 	
 	
 

@@ -9,9 +9,9 @@ public class QuanlyHoadon {
 	
 	private HoadonHome hdhome = new HoadonHome();
 	
-	public void luuHoadonmoi(Hoadon hd)
+	public void capnhapHoadon(Hoadon hd)
 	{
-		hdhome.attachDirty(hd);
+		hdhome.merge(hd);
 	}
 	
 	public boolean suaHoadon(Hoadon newhd)

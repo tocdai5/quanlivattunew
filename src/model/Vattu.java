@@ -94,7 +94,7 @@ public class Vattu implements java.io.Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((mavattu == null) ? 0 : mavattu.hashCode());
 		return result;
 	}
 
@@ -107,16 +107,12 @@ public class Vattu implements java.io.Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Vattu other = (Vattu) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (mavattu == null) {
+			if (other.mavattu != null)
 				return false;
-		} else if (!(id== other.id))
+		} else if (!mavattu.equals(other.mavattu))
 			return false;
 		return true;
 	}
-	
-	
-	
-	
 
 }

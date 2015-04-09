@@ -23,6 +23,11 @@ private List<Doituong> lstDoituong;
 		}
 	}
 
+	public Doituong getByIndex(int index)
+	{
+		return lstDoituong.get(index);
+	}
+
 	public List<Doituong> getLstDoituong() {
 		return lstDoituong;
 	}

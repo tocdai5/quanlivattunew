@@ -112,7 +112,7 @@ public class FormDangNhap extends JFrame {
 			try {
 				Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");//load driver
 				String url = "jdbc:mysql://localhost:3306/quanlivattu";
-			    String user="root", passwd="root";
+			    String user="root", passwd="";
 			    Connection conn=DriverManager.getConnection(url, user, passwd);
 			    Statement stm=conn.createStatement();  
 			    String qrselect ="select * from user where User='"+tfName.getText().toString().trim()+"'and Password='"+new String(tfPass.getPassword()).trim()+"'";
